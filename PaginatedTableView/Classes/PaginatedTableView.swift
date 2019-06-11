@@ -24,6 +24,8 @@ public protocol PaginatedTableViewDataSource: class {
     func loadMore(_ pageNumber: Int, _ pageSize: Int, onSuccess: ((Bool) -> Void)?, onError: ((Error) -> Void)?)
     @objc optional func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
     @objc optional func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
+    
+    @objc optional func scrollViewDidScroll(_ scrollView: UIScrollView)
 }
 
 //
@@ -158,6 +160,7 @@ extension PaginatedTableView {
             load()
         }
         print("Scroll: \(distanceFromBottom)")
+        paginatedDelegate?.scrollViewDidScroll?(scrollView)
     }
 }
 
